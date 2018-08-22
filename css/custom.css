@@ -1,13 +1,1 @@
 /* your styles go here */
-
-.testimonial-container {
-    display: flex !important;
-    justify-content: center;
-}
-
-.testimonial-author-name {
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color:#777;
-    font-size:0.9rem;
-}
