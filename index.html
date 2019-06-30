@@ -418,21 +418,21 @@
         </header>
         <div class="row">
           <div class="col-lg-8 mx-auto">
-            <form id="contact-form" method="post" action="">
+            <form id="contact-form" method="post">
               <div class="messages"></div>
               <div class="controls">
                 <div class="row">
                   <div class="col-md-6">
-                    <input type="text" name="name" placeholder="Your firstname *" required="required" class="form-control">
+                    <input type="text" name="firstName" placeholder="Your firstname *" required="required" class="form-control">
                   </div>
                   <div class="col-md-6">
-                    <input type="text" name="surname" placeholder="Your lastname *" required="required" class="form-control">
+                    <input type="text" name="lastName" placeholder="Your lastname *" class="form-control">
                   </div>
                   <div class="col-md-6">
                     <input type="text" name="email" placeholder="Your email *" required="required" class="form-control">
                   </div>
                   <div class="col-md-6">
-                    <input type="text" name="phone" placeholder="Your phone" class="form-control">
+                    <input type="text" name="phoneNumber" placeholder="Your phone" class="form-control">
                   </div>
                   <div class="col-md-12">
                     <textarea name="message" placeholder="Message for me *" rows="4" required="required" class="form-control"></textarea>
@@ -503,6 +503,29 @@
     <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="vendor/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="vendor/jquery.counterup/jquery.counterup.js"></script>
+    <script>
+      const form = document.getElementById('contact-form')
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const mailSenderUrl = 'https://mail-composer.herokuapp.com/api/v1'
+        const formData = new FormData(this);
+        const searchParams = new URLSearchParams();
+        for (const pair of formData) {
+          searchParams.append(pair[0], pair[1])
+        }
+        
+        
+        fetch(mailSenderUrl, {
+          method: 'post',
+          body: searchParams
+        }).then(function (response) {
+          console.log(response);
+        }).catch(function(err) {
+          console.log(err); 
+        })
+      })
+      
+    </script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script> -->
     <script src="js/front.js"></script>
   </body>
